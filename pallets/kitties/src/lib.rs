@@ -28,9 +28,9 @@ type BalanceOf<T> =
 use sp_runtime::traits::Hash;
 
 use frame_support::traits::Randomness;
-use frame_support::dispatch::fmt::Debug;
+//use frame_support::dispatch::fmt::Debug;
 
-use sp_runtime::SaturatedConversion;
+//use sp_runtime::SaturatedConversion;
 #[frame_support::pallet]
 pub mod pallet {
 
@@ -133,9 +133,9 @@ pub mod pallet {
 			let max = T::Max::get();
 			let get_kitties = KittiesOwned::<T>::get(&owner);
 			ensure!((get_kitties.len() as u32) < max, Error::<T>::ExceedKittyNumber); 
-			let convert = T::KittyTime::now().saturated_into::<u64>();
+			//let convert = T::KittyTime::now().saturated_into::<u64>();
 			//let convert_moment =<<T as Config>::KittyTime as Time>::Moment::saturated_from(convert);
-			let convert_moment: <<T as Config>::KittyTime as Time>::Moment = now.try_into().map_err(|_| Error::<T>::CannotConvert)?;
+			//let convert_moment: <<T as Config>::KittyTime as Time>::Moment = now.try_into().map_err(|_| Error::<T>::CannotConvert)?;
 			//let convert_moment = now.saturated_from(convert);
 			// Check if the kitty does not already exist in our storage map
 			ensure!(!Kitties::<T>::contains_key(&kitty.dna), Error::<T>::DuplicateKitty);
@@ -177,7 +177,7 @@ pub mod pallet {
 			}
 
 			let mut to_owned = KittiesOwned::<T>::get(&to);
-			to_owned.try_push(dna.clone()).map_err(|_| Error::<T>::ExceedKittyNumber)?;;
+			to_owned.try_push(dna.clone()).map_err(|_| Error::<T>::ExceedKittyNumber)?;
 			kitty.owner = to.clone();
 
 			// Write updates to storage
